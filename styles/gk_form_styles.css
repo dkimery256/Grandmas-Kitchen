@@ -1,0 +1,68 @@
+/*Basic menu styles*/
+body{
+    padding: 2%;
+}
+label{
+    font-size: 14px !important;
+    font-weight: bold;
+    color: black;
+    width: 200px !important;
+}
+
+input{
+    font-size: 14px !important;
+}
+
+textarea{
+    font-size: 14px !important;
+}
+
+h1{
+    margin-top: 0px;
+    padding: 0px
+}
+/*Legend styles*/
+legend{
+    font-weight: bold;
+    font-size: 22px;
+    display: inline-block !important;
+    color: royalblue !important;       
+}
+
+/*Anchor in legend tag styles*/
+#show a{
+    text-decoration: none !important; 
+    color: black !important;     
+}
+#show a:hover{
+    color: midnightblue !important;
+}
+#show a:visited{
+    color: black !important;
+}
+
+/*Nav styles*/
+.nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    display: inline-block;
+}
+.nav li {
+    float: left;
+    border-right:1px solid #bbb;
+}
+
+.nav li a{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+ 
+.nav li a:hover {
+    background-color: royalblue;
+}
