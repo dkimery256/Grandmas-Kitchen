@@ -38,10 +38,10 @@ if(is_array($files)){
     <ul id="pic_list">
         <form method="POST" action="gk_delete_pic.php">
             <?php
-        foreach($photo_names as $photo){
-            echo "<li name=\"$photo\" class=\"pic_name\">$photo</li>";
-        }       
-    ?>
+            foreach($photo_names as $photo){
+                echo "<li name=\"$photo\" class=\"pic_name\">$photo</li>";
+            }       
+            ?>
             <img id="current">
 
             <input type="hidden" name="delete_value" type="text" id="delete">

@@ -1,0 +1,11 @@
+{
+  "name": "dev-gk",
+  "version": "1.0.0",
+  "description": "menu generator",
+  "main": "gk_menu_form.php",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "David Kimery",
+  "license": "ISC"
+}

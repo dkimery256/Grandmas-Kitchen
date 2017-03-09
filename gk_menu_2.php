@@ -3,8 +3,9 @@
 //import required files
 require_once 'scripts/gk_menu_util.php';
 
-//Get menu data from url
-$menu = json_decode($_GET['menu'], true);
+//Get menu data from session
+session_start();
+$menu = $_SESSION['menu_2'];
 
 //Get files in upload folder.
 $dir = "uploads";
@@ -32,6 +33,7 @@ if(is_array($files)){
 
 <head>
     <title>Menu 2</title>
+    <link rel="shortcut icon" type="image/png" href="https://gk-menu.herokuapp.com/icon_16x16.png">
     <link rel="stylesheet" href="styles/gk_menu_styles.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="scripts/gk_menu_main.js"></script>
@@ -107,7 +109,7 @@ if(is_array($files)){
             //Check to ensure window was put in fullscreen mode before starting slide show
             //In case the window resize was just to move the tab or window
             if (document.webkitIsFullScreen) {
-                var dir = "/gk-menu/uploads/";
+                var dir = "/uploads/";
                 //Get info from php and json encode it because it is an array
                 var image_names = <?php echo json_encode($photo_names); ?>;
                 var images = <?php echo json_encode($files); ?>;
