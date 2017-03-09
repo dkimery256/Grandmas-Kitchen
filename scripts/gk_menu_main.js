@@ -1,8 +1,10 @@
 $(document).ready(function() {
 
+    //declare fullscreen bool
+    var go_fullscreen;
     //Variables needed to set the width of the tables
     var max = 0,
-        $cells = $('td');
+    $cells = $('td');
 
     //Set width of the table data
     $cells.each(function() {
@@ -42,6 +44,7 @@ $(document).ready(function() {
     //to maintain font and size integrety
     $(document).on('keyup', function(evt) {
         if (evt.keyCode == 27) {
+            evt.preventDefault()
             location.reload();
         }
     });

@@ -1,6 +1,8 @@
 <html>
  <head>
-  <!--<link href="../css/phpMM.css" rel="stylesheet" type="text/css" />-->
+  <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" 
+    integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" 
+    crossorigin="anonymous">
  </head>
 
  <body>
@@ -31,8 +33,8 @@
       contact us to find out more about what's happened, or you have any 
       concerns, just <a href="mailto:dkimery256@outlook.com">email us</a>
       and we'll be happy to get right back to you.</p>
-    <p>In the meantime, if you want to go back o the page that caused 
-      the problem, you can do that <a href="javascript:history.go(-1);">by 
+    <p>In the meantime, if you want to go back to the menu form that caused 
+      the problem, you can do that <a href="../index.php">by 
       clicking here</a> If the same problem occurs, though, you may
       want to come back a bit later. We bet we'll have things figured
       out by then. Thanks again... we'll see you soon. And again, we're 

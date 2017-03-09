@@ -75,7 +75,7 @@ $(document).ready(function() {
     //Open new window to view files in app to delete
     $("#delete_pic").click(function() {
         var winFeature =
-            'left=250,top=100,width=600,height=500,toolbar=no,menubar=no';
+            'left=250,top=100,menubar=no,status=no,location=no,toolbar=no,scrollbars=yes';
         window.open('gk_delete_menu.php', 'null', winFeature);
     });
 

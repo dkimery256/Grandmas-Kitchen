@@ -1,8 +1,7 @@
 <?php 
 
 //import required files
-require_once "app_config.php";
-require_once "database_connection.php";//instantiate the mysqli object
+//require_once "database_connection.php";
 require_once "gk_db_util.php";
 
 //function to replace ampersand
@@ -17,7 +16,7 @@ function replace_ampersand($array){
     return $array;
 }
 
-//Get form data from post, trim white space, and replace & with and to avoid method get errors 
+//Get form data from post, trim white space, and replace & with and to avoid url GET errors 
 $breakfast = replace_ampersand(array_map('trim',$_POST['breakfast']));
 $salads = replace_ampersand(array_map('trim',$_POST['salads']));
 $cold_sands = replace_ampersand(array_map('trim',$_POST['cold_sands']));
@@ -27,7 +26,7 @@ $hot_sands = replace_ampersand(array_map('trim',$_POST['hot_sands']));
 $veggies = replace_ampersand(array_map('trim',$_POST['veggies']));
 $specials = replace_ampersand(array_map('trim',$_POST['specials']));
 $headers = replace_ampersand(array_map('trim', $_POST['headers']));
-$menu = ['headers' => $headers];
+$menu_headers = ['headers' => $headers];
 $menu_1_headers = array(
     'header_1' => $headers['header_1'],
     'header_2' => $headers['header_2'],
@@ -54,10 +53,12 @@ if($image_check && $field_check){
     $upload_dir = '../uploads/';
     
     //Handle errors caused by wrong download type
-    $php_errors = array(1 => 'Maximum file size in php.ini exceeded',
-                           2 => 'Maximum file size in  HTML form exceeded',
-                           3 => 'Only part of the file was uploaded',
-                           4 => 'No file was selected to upload');
+    $php_errors = array(
+        1 => 'Maximum file size in php.ini exceeded',
+        2 => 'Maximum file size in  HTML form exceeded',
+        3 => 'Only part of the file was uploaded',
+        4 => 'No file was selected to upload'
+        );
     
         //Check for error during uploading
         ($_FILES[$image_fieldname]['error'] == 0)
@@ -107,40 +108,46 @@ $menu_2 = array(
     'hot_sands' => $hot_sands,
     'veggies'   => $veggies,      
     'specials'  => $specials
-);
+    );
 
 //update database with data submitted
-gk_db_util::update_headers($menu, $mysqli);
-gk_db_util::update_breakfast($menu_1, $mysqli);
-gk_db_util::update_salads($menu_1, $mysqli);
-gk_db_util::update_cold_sands($menu_1, $mysqli);
-gk_db_util::update_wraps($menu_1, $mysqli);
-gk_db_util::update_sides($menu_1, $mysqli);
-gk_db_util::update_hot_sands($menu_2, $mysqli);
-gk_db_util::update_veggies($menu_2, $mysqli);
-gk_db_util::update_specials($menu_2, $mysqli);
+gk_db_util::update_headers($menu_headers);
+gk_db_util::update_breakfast($menu_1);
+gk_db_util::update_salads($menu_1);
+gk_db_util::update_cold_sands($menu_1);
+gk_db_util::update_wraps($menu_1);
+gk_db_util::update_sides($menu_1);
+gk_db_util::update_hot_sands($menu_2);
+gk_db_util::update_veggies($menu_2);
+gk_db_util::update_specials($menu_2);
 
-$mysqli->close();
+session_start();
+$_SESSION['menu_1'] = $menu_1;
+$_SESSION['menu_2'] = $menu_2;
+
 ?>
+<head>
+    <title>Menus Updated</title>
+    <link rel="shortcut icon" type="image/png" href="https://gk-menu.herokuapp.com/icon_16x16.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" 
+    integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" 
+    crossorigin="anonymous">
+    <meta charset="UTF-8">
+</head>
+<p style="margin-left: 10px;">Menu's successfully loaded!</p>
+<input style="margin-left: 10px;" type="button" id="openMenu1" value="Open Menu 1" class="pure-button"><br><br>
+<input style="margin-left: 10px;" type="button" id="openMenu2" value="Open Menu 2" class="pure-button">
+<p style="margin-left: 10px;text-deceration: none;"><a href="https://gk-menu.herokuapp.com">Go back to menu form.</a></p>
 <!--Javascript to control the flow of data to the menus and html content of loading page-->
 <script type="text/javascript" language="Javascript">
-
-//Event to fire once window it loaded
-window.onload = function () {
-    //encode php array into json data
-    var menu1 = <?php echo json_encode($menu_1); ?>;                
-    var menu2 = <?php echo json_encode($menu_2); ?>;    
-
-    //convert the json data into string and uri encode it for the url
-    menu1 = JSON.stringify(menu1);
-    menu1 = encodeURI(menu1);
-
-    menu2 = JSON.stringify(menu2);
-    menu2 = encodeURI(menu2);
-
-    //Open new tabs and send converted php data
-    window.open('../gk_menu_1.php?menu=' + menu1);
-    window.open('../gk_menu_2.php?menu=' + menu2);
-    window.open('../gk_menu_form.php', "_self");                            
-}            
+$(document).ready(function() { 
+    //Open menus and go back to the form
+    $('#openMenu1').click(function() {   
+        window.open('../gk_menu_1.php');        
+    });
+    $('#openMenu2').click(function() {   
+        window.open('../gk_menu_2.php');         
+    });
+});
 </script>    
